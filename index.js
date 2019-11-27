@@ -11,7 +11,7 @@ program.version('0.0.1');
 program
   .requiredOption('-s, --source <path>', 'compiled smart-contract')
   .option('-o, --output <path>', 'directory output', './docs')
-  .option('-t, --template <path>', 'template to use', './templates/template.sqrl');
+  .option('-t, --template <path>', 'template to use', './templates/default.sqrl');
 
 program.parse(process.argv);
 
@@ -66,6 +66,8 @@ function createDocumentationFor(
         data.methods[methodName].params[parametersKeys[i]].type = parametersTypes[i];
       }
     }
+
+    console.log(data.methods[methodName].params);
   }
 
   console.log(data);
