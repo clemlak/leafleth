@@ -1,0 +1,52 @@
+# {{contract.name}}
+
+{{if(options.contract.title !== undefined)}}
+> {{contract.title}}
+{{/if}}
+
+
+{{if(options.contract.author !== undefined)}}
+*{{contract.author}}*
+{{/if}}
+
+{{if(options.contract.notice !== undefined)}}
+{{contract.notice}}
+{{/if}}
+
+{{if(options.contract.details !== undefined)}}
+{{contract.details}}
+{{/if}}
+
+
+## Methods
+
+{{foreach(options.methods)}}
+### `{{@key}}`
+
+{{if(@this.notice)}}
+{{@this.notice}}
+{{/if}}
+
+{{if(@this.details)}}
+{{@this.details}}
+{{/if}}
+
+{{if(@this.params)}}
+
+#### Parameters
+
+| Name | Type | Description |
+| -------- | -------- | -------- |
+{{foreach(@this.params)}}
+| {{@key}} | {{@this.type}} | {{@this.description}} |
+{{/foreach}}
+{{/if}}
+
+{{if(@this.return)}}
+#### Returns
+
+{{@this.return}}
+{{/if}}
+
+
+{{/foreach}}

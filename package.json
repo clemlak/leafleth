@@ -1,0 +1,29 @@
+{
+  "name": "leafleth",
+  "version": "0.0.1",
+  "description": "Documentation generator for Solidity",
+  "main": "./index.js",
+  "bin": "./bin/leafleth",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clemlak/leafleth.git"
+  },
+  "author": "Clement Lakhal (https://twitter.com/ClementCodes)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/clemlak/leafleth/issues"
+  },
+  "homepage": "https://github.com/clemlak/leafleth#readme",
+  "dependencies": {
+    "commander": "^4.0.1",
+    "squirrelly": "^7.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.7.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  }
+}
