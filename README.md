@@ -1,4 +1,4 @@
-# � Leafleth
+# 📑 Leafleth
 
 Leafleth is a documentation generator for your smart-contracts written in Solidity. It also uses a template engine to allow anyone to create customized documentation in a snap.
 
@@ -46,7 +46,7 @@ To create a new template, you can use the [default](https://github.com/clemlak/l
 
 While generating the documentation, Leafleth will send the following object to your template:
 
-```:javascript
+```javascript
 {
   contract: {
     name: 'BasicExample',
@@ -77,7 +77,7 @@ While generating the documentation, Leafleth will send the following object to y
 
 To display a value, you'll simply have to use its [global reference](https://squirrelly.js.org/docs/v7/global-refs/). For example:
 
-```:html
+```html
 <h1>{{contract.title}}</h1>
 ```
 
