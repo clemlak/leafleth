@@ -7,7 +7,7 @@ const commander = require('commander');
 
 const program = new commander.Command();
 
-program.version('0.0.4');
+program.version('0.0.5');
 
 const defaultTemplatePath = path.join(__dirname, 'templates', 'default.sqrl');
 
