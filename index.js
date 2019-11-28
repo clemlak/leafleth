@@ -7,7 +7,7 @@ const commander = require('commander');
 
 const program = new commander.Command();
 
-program.version('0.0.2');
+program.version('0.0.3');
 
 program
   .requiredOption('-s, --source <path>', 'compiled smart-contract')
