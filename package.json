@@ -1,6 +1,6 @@
 {
   "name": "leafleth",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Documentation generator for Solidity",
   "main": "./index.js",
   "bin": "./bin/leafleth",
