@@ -31,6 +31,7 @@ The contract has been deployed to:
 ### → Returns
 
 
+
 | Name | Type |
 |:-:|:-:|
 |  Not specified  | `bool` |
@@ -45,6 +46,7 @@ The contract has been deployed to:
 
 
 ### → Returns
+
 
 
 | Name | Type |
@@ -111,6 +113,7 @@ This is an external view function
 ### → Returns
 
 The value of the number
+
 | Name | Type |
 |:-:|:-:|
 |  Not specified  | `uint256` |
@@ -133,6 +136,7 @@ This function looks complex
 ### → Returns
 
 A cool numberAnother cool number
+
 | Name | Type |
 |:-:|:-:|
 |  Not specified  | `uint256` |
@@ -162,6 +166,7 @@ This function looks complex
 ### → Returns
 
 The sum of a + b
+
 | Name | Type |
 |:-:|:-:|
 |  Not specified  | `uint256` |

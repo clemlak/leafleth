@@ -74,6 +74,7 @@ The contract has been deployed to:
 {{@this.return}}
 {{/if}}
 
+
 {{if(@this.outputs.length > 0)}}
 | Name | Type |
 |:-:|:-:|
