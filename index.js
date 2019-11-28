@@ -9,10 +9,12 @@ const program = new commander.Command();
 
 program.version('0.0.4');
 
+const defaultTemplatePath = path.join(__dirname, 'templates', 'default.sqrl');
+
 program
   .requiredOption('-s, --source <path>', 'compiled smart-contract')
   .option('-o, --output <path>', 'directory output', './docs')
-  .option('-t, --template <path>', 'template to use', './templates/default.sqrl')
+  .option('-t, --template <path>', 'template to use', defaultTemplatePath)
   .option('-d, --debug', 'enable debug mode');
 
 program.parse(process.argv);
