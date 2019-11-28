@@ -24,7 +24,7 @@
 {{contract.details}}
 {{/if}}
 
-{{if(options.contract.networks)}}
+{{if(Object.keys(options.contract.networks).length > 0)}}
 
 ### 📡 Networks
 
