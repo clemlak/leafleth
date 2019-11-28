@@ -1,31 +1,43 @@
 # {{contract.name}}
 
-{{if(options.contract.title !== undefined)}}
+{{if(options.contract.title)}}
 > {{contract.title}}
 {{/if}}
 
 
-{{if(options.contract.author !== undefined)}}
-*{{contract.author}}*
+
+{{if(options.contract.author)}}
+👤 *{{contract.author}}*
 {{/if}}
 
-{{if(options.contract.notice !== undefined)}}
+
+{{if(options.contract.notice)}}
 {{contract.notice}}
 {{/if}}
 
-{{if(options.contract.details !== undefined)}}
+
+{{if(options.contract.details)}}
 {{contract.details}}
 {{/if}}
 
-
-## Methods
-
 {{foreach(options.methods)}}
-### `{{@key}}`
+## `{{@key}}`
+
+{{if(@this.author)}}
+* 👤 {{@this.author}}
+{{/if}}
+
+{{if(@this.stateMutability)}}
+* 👀 `{{@this.stateMutability}}`
+{{/if}}
+{{if(@this.payable)}}
+* 💰 Payable
+{{/if}}
 
 {{if(@this.notice)}}
 {{@this.notice}}
 {{/if}}
+
 
 {{if(@this.details)}}
 {{@this.details}}
@@ -33,19 +45,30 @@
 
 {{if(@this.params)}}
 
-#### Parameters
+### ⚙️ Parameters
 
 | Name | Type | Description |
-| -------- | -------- | -------- |
+|:-:|:-:| - |
 {{foreach(@this.params)}}
-| {{@key}} | {{@this.type}} | {{@this.description}} |
+| {{@key}} | `{{@this.type}}` | {{@this.description}} |
 {{/foreach}}
 {{/if}}
 
-{{if(@this.return)}}
-#### Returns
+{{if(@this.return !== undefined || @this.outputs.length > 0)}}
+### → Returns
 
+{{if(@this.return)}}
 {{@this.return}}
+{{/if}}
+
+{{if(@this.outputs.length > 0)}}
+| Name | Type |
+|:-:|:-:|
+{{each(@this.outputs)}}
+| {{if(@this.name !== "")}} {{@this.name}} {{#else}} Not specified {{/if}} | `{{@this.type}}` |
+{{/each}}
+{{/if}}
+
 {{/if}}
 
 

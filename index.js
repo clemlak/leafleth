@@ -6,12 +6,13 @@ const commander = require('commander');
 
 const program = new commander.Command();
 
-program.version('0.0.1');
+program.version('0.0.2');
 
 program
   .requiredOption('-s, --source <path>', 'compiled smart-contract')
   .option('-o, --output <path>', 'directory output', './docs')
-  .option('-t, --template <path>', 'template to use', './templates/default.sqrl');
+  .option('-t, --template <path>', 'template to use', './templates/default.sqrl')
+  .option('-d, --debug', 'enable debug mode');
 
 program.parse(process.argv);
 
@@ -19,6 +20,7 @@ function createDocumentationFor(
   sourcePath,
   outputDir,
   templatePath,
+  debug,
 ) {
   const file = fs.readFileSync(sourcePath, 'utf8');
   const content = JSON.parse(file);
@@ -36,11 +38,21 @@ function createDocumentationFor(
   data.contract.details = content.devdoc.details;
   data.contract.author = content.devdoc.author;
 
+  content.abi.forEach((method) => {
+    data.methods[method.name] = {
+      constant: method.constant,
+      payable: method.payable,
+      stateMutability: method.stateMutability,
+      type: method.type,
+      outputs: method.outputs,
+    };
+  });
+
   for (const [key, value] of Object.entries(content.userdoc.methods)) {
     const fragments = key.split('(');
     const methodName = fragments[0];
 
-    data.methods[methodName] = value;
+    data.methods[methodName].notice = value.notice;
   }
 
   for (const [key, value] of Object.entries(content.devdoc.methods)) {
@@ -49,6 +61,7 @@ function createDocumentationFor(
 
     data.methods[methodName].details = value.details;
     data.methods[methodName].return = value.return;
+    data.methods[methodName].author = value.author;
 
     if (value.params) {
       for (const [parameter, description] of Object.entries(value.params)) {
@@ -66,11 +79,7 @@ function createDocumentationFor(
         data.methods[methodName].params[parametersKeys[i]].type = parametersTypes[i];
       }
     }
-
-    console.log(data.methods[methodName].params);
   }
-
-  console.log(data);
 
   const result = Sqrl.Render(template, data);
 
@@ -82,6 +91,11 @@ function createDocumentationFor(
 
   const outputPath = `${outputDir}/${data.contract.name}.md`;
   fs.writeFileSync(outputPath, result, 'utf8');
+
+  if (debug) {
+    const debugOutputPath = `${outputDir}/${data.contract.name}.debug.json`;
+    fs.writeFileSync(debugOutputPath, JSON.stringify(data), 'utf8');
+  }
 }
 
 if (fs.statSync(program.source).isDirectory()) {
@@ -92,6 +106,7 @@ if (fs.statSync(program.source).isDirectory()) {
       `${program.source}/${files[i]}`,
       program.output,
       program.template,
+      program.debug,
     );
   }
 } else {
@@ -99,5 +114,6 @@ if (fs.statSync(program.source).isDirectory()) {
     program.source,
     program.output,
     program.template,
+    program.debug,
   );
 }
