@@ -1,45 +1,58 @@
 # {{contract.name}}
 
+> {{if(options.contract.author)}}👤 {{contract.author}}{{/if}}
+
+```
 {{if(options.contract.title)}}
-> {{contract.title}}
+{{contract.title}}
 {{/if}}
 
-
-
-{{if(options.contract.author)}}
-👤 *{{contract.author}}*
-{{/if}}
-
+```
 
 {{if(options.contract.notice)}}
+
+### 📋 Notice
+
 {{contract.notice}}
 {{/if}}
 
 
 {{if(options.contract.details)}}
+
+### 🔎 Details
+
 {{contract.details}}
 {{/if}}
+
+{{if(options.contract.networks)}}
+
+### 📡 Networks
+
+The contract has been deployed to:
+{{foreach(options.contract.networks)}}
+* **Network {{@key}}**: `{{@this.address}}`
+{{/foreach}}
+
+{{/if}}
+
 
 {{foreach(options.methods)}}
 ## `{{@key}}`
 
-{{if(@this.author)}}
-* 👤 {{@this.author}}
-{{/if}}
-
-{{if(@this.stateMutability)}}
-* 👀 `{{@this.stateMutability}}`
-{{/if}}
-{{if(@this.payable)}}
-* 💰 Payable
-{{/if}}
+>{{if(@this.stateMutability)}}👀 `{{@this.stateMutability}}`{{/if}}{{if(@this.payable)}} | 💰 Payable{{/if}}{{if(@this.author)}} | 👤 {{@this.author}} {{/if}}
 
 {{if(@this.notice)}}
+
+### 📋 Notice
+
 {{@this.notice}}
 {{/if}}
 
 
 {{if(@this.details)}}
+
+### 🔎 Details
+
 {{@this.details}}
 {{/if}}
 

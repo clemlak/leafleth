@@ -1,5 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 
+const path = require('path');
 const fs = require('fs');
 const Sqrl = require('squirrelly');
 const commander = require('commander');
@@ -37,6 +38,7 @@ function createDocumentationFor(
   data.contract.title = content.devdoc.title;
   data.contract.details = content.devdoc.details;
   data.contract.author = content.devdoc.author;
+  data.contract.networks = content.networks;
 
   content.abi.forEach((method) => {
     data.methods[method.name] = {
@@ -89,11 +91,21 @@ function createDocumentationFor(
     fs.mkdirSync(outputDir);
   }
 
-  const outputPath = `${outputDir}/${data.contract.name}.md`;
+  const outputPath = path.format({
+    dir: outputDir,
+    name: data.contract.name,
+    ext: '.md',
+  });
+
   fs.writeFileSync(outputPath, result, 'utf8');
 
   if (debug) {
-    const debugOutputPath = `${outputDir}/${data.contract.name}.debug.json`;
+    const debugOutputPath = path.format({
+      dir: outputDir,
+      name: data.contract.name,
+      ext: '.debug.json',
+    });
+
     fs.writeFileSync(debugOutputPath, JSON.stringify(data), 'utf8');
   }
 }
