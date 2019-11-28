@@ -43,13 +43,15 @@ function createDocumentationFor(
   data.contract.networks = content.networks;
 
   content.abi.forEach((method) => {
-    data.methods[method.name] = {
-      constant: method.constant,
-      payable: method.payable,
-      stateMutability: method.stateMutability,
-      type: method.type,
-      outputs: method.outputs,
-    };
+    if (method.type !== 'constructor') {
+      data.methods[method.name] = {
+        constant: method.constant,
+        payable: method.payable,
+        stateMutability: method.stateMutability,
+        type: method.type,
+        outputs: method.outputs,
+      };
+    }
   });
 
   for (const [key, value] of Object.entries(content.userdoc.methods)) {
