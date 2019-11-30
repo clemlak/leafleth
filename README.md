@@ -2,6 +2,8 @@
 
 Leafleth is a documentation generator for your Solidity smart-contracts. It also integrates a template engine to allow anyone to create customized documentation in a snap.
 
+***Note:** This tool is still in development and new fixes are pushed almost daily, I highly recommend you to update it every time you use it!*
+
 ## 🎉 Example
 
 [This example](https://github.com/clemlak/leafleth/blob/master/examples/BasicExample.md) was generated using the default template provided by Leafleth.
@@ -12,11 +14,11 @@ You can install Leafleth as a global package:
 
 Using npm:
 
-`npm i -g leafleth@alpha`
+`npm i -g leafleth`
 
 Or using yarn:
 
-`yarn add global leafleth@alpha`
+`yarn add global leafleth`
 
 Additionally, Leafleth can be installed as a local package in your project.
 
