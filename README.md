@@ -167,7 +167,7 @@ The following issues have been found and will be resolved soon:
 * Private or internal functions are not displayed
 * Modifiers are not displayed
 * Functions from an inherited contract may not be displayed correctly
-* Events are not supported yet
+* Overloaded functions may not be displayed correctly
 
 ## 📄 License
 
