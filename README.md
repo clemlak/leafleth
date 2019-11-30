@@ -12,11 +12,11 @@ You can install Leafleth as a global package:
 
 Using npm:
 
-`npm i -g leafleth`
+`npm i -g leafleth@alpha`
 
 Or using yarn:
 
-`yarn add global leafleth`
+`yarn add global leafleth@alpha`
 
 Additionally, Leafleth can be installed as a local package in your project.
 
@@ -33,11 +33,11 @@ The source is the only required option, and it must refer to the path of a `.jso
 ### 🎛 Options
 
 * `-s` or `--source` **(required)**: The path to a file or a directory, which will be used to generate the documentation.
-* `-o` or `--output`: The directory used to output the documentation. If no value is provided, Leafleth will create a `docs` directory.
-* `-t` or `--template`: The template used to generate the documentation. If no value is provided, the default template will be used
-* `-d` or `--debug`: Enable debug mode
-* `-V` or `--version`: Display the version number
-* `-h` or `--help`: Display usage information 
+* `-o` or `--output`: The directory used to output the documentation. If no value is provided, Leafleth will output the documentation into the source directory.
+* `-t` or `--template`: The template used to generate the documentation. If no value is provided, the default template will be used.
+* `-d` or `--debug`: Enable debug mode.
+* `-V` or `--version`: Display the version number.
+* `-h` or `--help`: Display usage information.
 
 ## 🎨 Create your own themes
 
@@ -165,6 +165,7 @@ The following issues have been found and will be resolved soon:
 * Private or internal functions are not displayed
 * Modifiers are not displayed
 * Functions from an inherited contract may not be displayed correctly
+* Events are not supported yet
 
 ## 📄 License
 
