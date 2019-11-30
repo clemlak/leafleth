@@ -17,7 +17,24 @@ Some dev stuff for the basic contract
 ### 📡 Networks
 
 The contract has been deployed to:
-* **Network 1574932643895**: `0x4f6DEA8B720BFED4789229156F8d6FbA05572902`
+* **Network 1575142431303**: `0x37dd0087B5c9ea6921a248FF1f69e22b3b4E9E5E`
+
+
+
+### 🎟 Events
+
+
+#### NumberUpdated
+| Name | Indexed | Type |
+|:-:|:-:|:-:|
+| sender | `true` | `address` |
+| newValue | `false` | `uint256` |
+
+
+#### RandomEvent
+| Name | Indexed | Type |
+|:-:|:-:|:-:|
+| someValue | `false` | `uint256` |
 
 
 
