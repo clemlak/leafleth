@@ -28,7 +28,11 @@ function createDocumentationFor(
   data.contract.networks = content.networks;
 
   content.abi.forEach((method) => {
-    if (method.type !== 'constructor' && method.type !== 'event') {
+    if (
+      method.type !== 'constructor'
+      && method.type !== 'event'
+      && method.type !== 'fallback'
+    ) {
       data.methods[method.name] = {
         constant: method.constant,
         payable: method.payable,
