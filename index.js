@@ -43,7 +43,7 @@ function createDocumentationFor(
   data.contract.networks = content.networks;
 
   content.abi.forEach((method) => {
-    if (method.type !== 'constructor') {
+    if (method.type !== 'constructor' && method.type !== 'event') {
       data.methods[method.name] = {
         constant: method.constant,
         payable: method.payable,
@@ -55,34 +55,38 @@ function createDocumentationFor(
   });
 
   for (const [key, value] of Object.entries(content.userdoc.methods)) {
-    const fragments = key.split('(');
-    const methodName = fragments[0];
+    if (key !== 'constructor') {
+      const fragments = key.split('(');
+      const methodName = fragments[0];
 
-    data.methods[methodName].notice = value.notice;
+      data.methods[methodName].notice = value.notice;
+    }
   }
 
   for (const [key, value] of Object.entries(content.devdoc.methods)) {
-    const fragments = key.split('(');
-    const methodName = fragments[0];
+    if (key !== 'constructor') {
+      const fragments = key.split('(');
+      const methodName = fragments[0];
 
-    data.methods[methodName].details = value.details;
-    data.methods[methodName].return = value.return;
-    data.methods[methodName].author = value.author;
+      data.methods[methodName].details = value.details;
+      data.methods[methodName].return = value.return;
+      data.methods[methodName].author = value.author;
 
-    if (value.params) {
-      for (const [parameter, description] of Object.entries(value.params)) {
-        data.methods[methodName].params = {};
-        data.methods[methodName].params[parameter] = {};
-        data.methods[methodName].params[parameter].description = description;
-      }
+      if (value.params) {
+        for (const [parameter, description] of Object.entries(value.params)) {
+          data.methods[methodName].params = {};
+          data.methods[methodName].params[parameter] = {};
+          data.methods[methodName].params[parameter].description = description;
+        }
 
-      const parametersTypesString = fragments[1].substring(0, fragments[1].length - 1);
-      const parametersTypes = parametersTypesString.split(',');
+        const parametersTypesString = fragments[1].substring(0, fragments[1].length - 1);
+        const parametersTypes = parametersTypesString.split(',');
 
-      const parametersKeys = Object.keys(data.methods[methodName].params);
+        const parametersKeys = Object.keys(data.methods[methodName].params);
 
-      for (let i = 0; i < parametersKeys.length; i += 1) {
-        data.methods[methodName].params[parametersKeys[i]].type = parametersTypes[i];
+        for (let i = 0; i < parametersKeys.length; i += 1) {
+          data.methods[methodName].params[parametersKeys[i]].type = parametersTypes[i];
+        }
       }
     }
   }
