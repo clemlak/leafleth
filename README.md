@@ -58,20 +58,78 @@ While generating the documentation, Leafleth will send the following object to y
     "details": "Some dev stuff for the basic contract",
     "author": "Clemlak",
     "networks": {
-      "1574932643895": {
-        "events": {},
+      "1575142431303": {
+        "events": {
+          "0x34fc9a8d030d354e59e2bf2e5d0f37f63355b58fdbef38546a8af45588c1c0c1": {
+            "anonymous": false,
+            "inputs": [
+              {
+                "indexed": true,
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+              },
+              {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "newValue",
+                "type": "uint256"
+              }
+            ],
+            "name": "NumberUpdated",
+            "type": "event",
+            "signature": "0x34fc9a8d030d354e59e2bf2e5d0f37f63355b58fdbef38546a8af45588c1c0c1"
+          },
+          "0x1e4f1784ac7a8562d6607d2a924880d7c77218e7da91e5c71705ba914a85582f": {
+            "anonymous": false,
+            "inputs": [
+              {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "someValue",
+                "type": "uint256"
+              }
+            ],
+            "name": "RandomEvent",
+            "type": "event",
+            "signature": "0x1e4f1784ac7a8562d6607d2a924880d7c77218e7da91e5c71705ba914a85582f"
+          }
+        },
         "links": {},
-        "address": "0x4f6DEA8B720BFED4789229156F8d6FbA05572902",
-        "transactionHash": "0xe0350f631339cf61cea08d168edcf3787829bf39825437fa9c1c3a4561de8b89"
+        "address": "0x37dd0087B5c9ea6921a248FF1f69e22b3b4E9E5E",
+        "transactionHash": "0x0a6eea50c8ce5db352490659ca42e9c434ef132f58903f9a0eb03f2a792321e6"
       }
     }
   },
   "methods": {
+    "isContractReady": {
+      "constant": true,
+      "payable": false,
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ]
+    },
+    "aRandomNumber": {
+      "constant": true,
+      "payable": false,
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ]
+    },
     "setNumber": {
       "constant": false,
       "payable": true,
       "stateMutability": "payable",
-      "type": "function",
       "outputs": [],
       "notice": "Sets a number",
       "details": "This is an external function",
@@ -87,7 +145,6 @@ While generating the documentation, Leafleth will send the following object to y
       "constant": false,
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function",
       "outputs": [],
       "notice": "Sets a number if the contract is ready",
       "details": "This is an external function",
@@ -98,11 +155,25 @@ While generating the documentation, Leafleth will send the following object to y
         }
       }
     },
+    "getNumber": {
+      "constant": true,
+      "payable": false,
+      "stateMutability": "view",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "notice": "Gets the number",
+      "details": "This is an external view function",
+      "return": "The value of the number"
+    },
     "getTwoNumbers": {
       "constant": true,
       "payable": false,
       "stateMutability": "pure",
-      "type": "function",
       "outputs": [
         {
           "internalType": "uint256",
@@ -123,7 +194,6 @@ While generating the documentation, Leafleth will send the following object to y
       "constant": true,
       "payable": false,
       "stateMutability": "pure",
-      "type": "function",
       "outputs": [
         {
           "internalType": "uint256",
@@ -140,6 +210,36 @@ While generating the documentation, Leafleth will send the following object to y
           "type": "uint256"
         }
       }
+    }
+  },
+  "events": {
+    "NumberUpdated": {
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newValue",
+          "type": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    "RandomEvent": {
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "someValue",
+          "type": "uint256"
+        }
+      ],
+      "anonymous": false
     }
   }
 }
