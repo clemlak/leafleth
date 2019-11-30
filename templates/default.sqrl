@@ -35,6 +35,23 @@ The contract has been deployed to:
 
 {{/if}}
 
+{{if(Object.keys(options.events).length > 0)}}
+
+### 🎟 Events
+
+{{foreach(options.events)}}
+
+#### {{@key}}
+
+| Name | Indexed | Type |
+|:-:|:-:|:-:|
+{{each(@this.inputs)}}
+| {{@this.name}} | `{{@this.indexed}}` | `{{@this.type}}` |
+{{/each}}
+
+{{/foreach}}
+
+{{/if}}
 
 {{foreach(options.methods)}}
 ## `{{@key}}`

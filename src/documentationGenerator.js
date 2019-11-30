@@ -18,6 +18,7 @@ function createDocumentationFor(
   const data = {
     contract: {},
     methods: {},
+    events: {},
   };
 
   data.contract.name = content.contractName;
@@ -29,16 +30,24 @@ function createDocumentationFor(
 
   content.abi.forEach((method) => {
     if (
-      method.type !== 'constructor'
-      && method.type !== 'event'
-      && method.type !== 'fallback'
+      method.type === 'function'
     ) {
       data.methods[method.name] = {
         constant: method.constant,
         payable: method.payable,
         stateMutability: method.stateMutability,
-        type: method.type,
         outputs: method.outputs,
+      };
+    }
+  });
+
+  content.abi.forEach((event) => {
+    if (
+      event.type === 'event'
+    ) {
+      data.events[event.name] = {
+        inputs: event.inputs,
+        anonymous: event.anonymous,
       };
     }
   });
