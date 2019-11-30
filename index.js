@@ -6,7 +6,7 @@ const createDocumentationFor = require('./src/documentationGenerator');
 
 const program = new commander.Command();
 
-program.version('0.0.7');
+program.version('0.0.8');
 
 const defaultTemplatePath = path.join(__dirname, 'templates', 'default.sqrl');
 
