@@ -71,16 +71,21 @@ function createDocumentationFor(
       data.methods[methodName].author = value.author;
 
       if (value.params) {
-        for (const [parameter, description] of Object.entries(value.params)) {
-          data.methods[methodName].params = {};
-          data.methods[methodName].params[parameter] = {};
-          data.methods[methodName].params[parameter].description = description;
-        }
+        //todo change to array
+
+        const abi = content.abi.filter(x => x.name == methodName);
+
+        data.methods[methodName].params = [];
 
         const parametersTypesString = fragments[1].substring(0, fragments[1].length - 1);
         const parametersTypes = parametersTypesString.split(',');
 
         const parametersKeys = Object.keys(data.methods[methodName].params);
+
+        abi[0].inputs.forEach(x => {
+          x.description = value.params[x.name];
+          data.methods[methodName].params.push(x)
+        });
 
         for (let i = 0; i < parametersKeys.length; i += 1) {
           data.methods[methodName].params[parametersKeys[i]].type = parametersTypes[i];
