@@ -86,10 +86,6 @@ function createDocumentationFor(
           x.description = value.params[x.name];
           data.methods[methodName].params.push(x)
         });
-
-        for (let i = 0; i < parametersKeys.length; i += 1) {
-          data.methods[methodName].params[parametersKeys[i]].type = parametersTypes[i];
-        }
       }
     }
   }
