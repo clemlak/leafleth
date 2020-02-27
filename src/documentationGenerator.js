@@ -4,6 +4,12 @@ const fs = require('fs');
 const path = require('path');
 const Sqrl = require('squirrelly');
 
+function signatureFromABI(method) {
+  const types = method.inputs.map(x => x.type);
+  const packed = types.join();
+  return method.name+"("+packed+")";
+}
+
 function createDocumentationFor(
   sourcePath,
   outputDir,
@@ -37,6 +43,7 @@ function createDocumentationFor(
         payable: method.payable,
         stateMutability: method.stateMutability,
         outputs: method.outputs,
+        signature: signatureFromABI(method)
       };
     }
   });
@@ -56,7 +63,6 @@ function createDocumentationFor(
     if (key !== 'constructor') {
       const fragments = key.split('(');
       const methodName = fragments[0];
-
       data.methods[methodName].notice = value.notice;
     }
   }
@@ -69,7 +75,6 @@ function createDocumentationFor(
       data.methods[methodName].details = value.details;
       data.methods[methodName].return = value.return;
       data.methods[methodName].author = value.author;
-      data.methods[methodName].fullName = key;
 
       if (value.params) {
         const abi = content.abi.filter(x => x.name == methodName);
