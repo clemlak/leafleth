@@ -69,10 +69,9 @@ function createDocumentationFor(
       data.methods[methodName].details = value.details;
       data.methods[methodName].return = value.return;
       data.methods[methodName].author = value.author;
+      data.methods[methodName].fullName = key;
 
       if (value.params) {
-        //todo change to array
-
         const abi = content.abi.filter(x => x.name == methodName);
 
         data.methods[methodName].params = [];
