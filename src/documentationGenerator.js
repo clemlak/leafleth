@@ -74,6 +74,8 @@ function createDocumentationFor(
 
       data.methods[methodName].details = value.details;
       data.methods[methodName].return = value.return;
+      //from solidity 0.6, now supports multiple return value on natspec
+      data.methods[methodName].returns = value.returns;
       data.methods[methodName].author = value.author;
 
       if (value.params) {
@@ -89,6 +91,13 @@ function createDocumentationFor(
         abi[0].inputs.forEach(x => {
           x.description = value.params[x.name];
           data.methods[methodName].params.push(x)
+        });
+      }
+
+      if (value.returns) {
+        data.methods[methodName].outputs.forEach(x => {
+          if (value.returns[x.name])
+          x.description = value.returns[x.name];
         });
       }
     }
