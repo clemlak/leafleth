@@ -4,6 +4,12 @@ const fs = require('fs');
 const path = require('path');
 const Sqrl = require('squirrelly');
 
+function signatureFromABI(method) {
+  const types = method.inputs.map(x => x.type);
+  const packed = types.join();
+  return method.name+"("+packed+")";
+}
+
 function createDocumentationFor(
   sourcePath,
   outputDir,
@@ -37,6 +43,7 @@ function createDocumentationFor(
         payable: method.payable,
         stateMutability: method.stateMutability,
         outputs: method.outputs,
+        signature: signatureFromABI(method)
       };
     }
   });
@@ -56,7 +63,6 @@ function createDocumentationFor(
     if (key !== 'constructor') {
       const fragments = key.split('(');
       const methodName = fragments[0];
-
       data.methods[methodName].notice = value.notice;
     }
   }
@@ -68,23 +74,31 @@ function createDocumentationFor(
 
       data.methods[methodName].details = value.details;
       data.methods[methodName].return = value.return;
+      //from solidity 0.6, now supports multiple return value on natspec
+      data.methods[methodName].returns = value.returns;
       data.methods[methodName].author = value.author;
 
       if (value.params) {
-        for (const [parameter, description] of Object.entries(value.params)) {
-          data.methods[methodName].params = {};
-          data.methods[methodName].params[parameter] = {};
-          data.methods[methodName].params[parameter].description = description;
-        }
+        const abi = content.abi.filter(x => x.name == methodName);
+
+        data.methods[methodName].params = [];
 
         const parametersTypesString = fragments[1].substring(0, fragments[1].length - 1);
         const parametersTypes = parametersTypesString.split(',');
 
         const parametersKeys = Object.keys(data.methods[methodName].params);
 
-        for (let i = 0; i < parametersKeys.length; i += 1) {
-          data.methods[methodName].params[parametersKeys[i]].type = parametersTypes[i];
-        }
+        abi[0].inputs.forEach(x => {
+          x.description = value.params[x.name];
+          data.methods[methodName].params.push(x)
+        });
+      }
+
+      if (value.returns) {
+        data.methods[methodName].outputs.forEach(x => {
+          if (value.returns[x.name])
+          x.description = value.returns[x.name];
+        });
       }
     }
   }
